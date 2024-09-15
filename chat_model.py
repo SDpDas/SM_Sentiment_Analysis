@@ -1,5 +1,4 @@
 import pickle 
-from sklearn.feature_extraction.text import TfidfVectorizer
 import re
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
