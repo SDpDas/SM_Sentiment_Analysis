@@ -1,11 +1,11 @@
 import pickle 
 import re
 from nltk.corpus import stopwords
-from nltk.stem.porter import PorterStemmer
+from nltk.stem import PorterStemmer
 
 #Loading the model and vectorizer
-load_model = pickle.load(open('trained_modelv3.sav', 'rb'))
-vectorizer = pickle.load(open('vectorizerv2.sav', 'rb'))
+load_model = pickle.load(open('/trained_model/trained_modelv2.sav', 'rb'))
+vectorizer = pickle.load(open('/vectorizer/vectorizerv2.sav', 'rb'))
 
 #Preprocessing the data
 port_stem = PorterStemmer()
@@ -16,14 +16,14 @@ def preprocess_text(text):
     stemmed_content = [port_stem.stem(word) for word in stemmed_content if word not in stopwords.words('english')]
     return ' '.join(stemmed_content)
 
-#Example chats
-chats = ["This was an exciting journey", "Shame she had to leave us", "I don't like you."]
+#Example tweets
+tweets = ["This was an exciting journey", "Shame she had to leave us", "I don't like you."]
 
-#preprocess the chats
-preprocess_chats = [preprocess_text(chat) for chat in chats]
+#preprocess the tweet
+preprocess_tweets = [preprocess_text(tweet) for tweet in tweets]
 
 #Transform the chats using vectorizer
-X_new = vectorizer.transform(preprocess_chats)
+X_new = vectorizer.transform(preprocess_tweets)
 
 #Make predictions
 predictions = load_model.predict(X_new)
@@ -31,7 +31,7 @@ predictions = load_model.predict(X_new)
 #0 for negative, 1 for neutral, 2 for positive chat
 
 #Print predictions
-for chat, prediction in zip(chats, predictions):
+for chat, prediction in zip(tweets, predictions):
     if prediction == 4:
         Sentiment = 'Positive Chat'
     elif prediction == 2:

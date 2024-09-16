@@ -1,11 +1,11 @@
 import pickle 
 import re
 from nltk.corpus import stopwords
-from nltk.stem.porter import PorterStemmer
+from nltk.stem import PorterStemmer
 
 #Loading the model and vectorizer
-load_model = pickle.load(open('dreview_model.sav', 'rb'))
-vectorizer = pickle.load(open('dvectorizer.sav', 'rb'))
+load_model = pickle.load(open('/trained_model/dreview_model.sav', 'rb'))
+vectorizer = pickle.load(open('/vectorizer/dvectorizer.sav', 'rb'))
 
 #Preprocessing the data
 port_stem = PorterStemmer()
